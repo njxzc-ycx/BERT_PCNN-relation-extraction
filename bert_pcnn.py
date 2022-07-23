@@ -263,12 +263,9 @@ if __name__ == "__main__":
 
             right_num += int(torch.sum(pre == batch_label_index))
 
-            y_true = batch_label_index.reshape(-1).cpu().numpy()
-            y_pre = pre.cpu().numpy()
-            f1 = f1_score(y_true, y_pre, average="micro")
 
         acc = right_num / len(dev_text) * 100
-        print(f"eopch:{e + 1}/{epoch}, loss:{loss:.5f}, dev_acc:{acc:.5f}, dev_f1:{f1:.5f}")
+        print(f"eopch:{e + 1}/{epoch}, loss:{loss:.5f}, dev_acc:{acc:.5f}")
         if acc > best_acc:  # 此时为最优模型，所以保存下载
             print("保存模型中！")
             best_acc = acc
@@ -300,9 +297,5 @@ if __name__ == "__main__":
             pre_label.append(index_2_label[i])
 
 
-        f1 = f1_score(y_true, y_pre, average="micro")
-    print(f"test--- :test_acc:{right_num / len(test_text) * 100:.5f}%, test_f1: {f1:.5f}")
+    print(f"test--- :test_acc:{right_num / len(test_text) * 100:.5f}%")
     pd.DataFrame({"text": test_text, "label_true": true_label, "label_pre": pre_label}).to_csv("text_result2.csv", index=False)
-
-
-
