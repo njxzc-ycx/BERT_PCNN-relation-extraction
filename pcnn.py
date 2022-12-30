@@ -167,7 +167,7 @@ class PCNNModel(nn.Module):
         self.mask_embedding = nn.Embedding(4, 3)
         self.mask_embedding.weight.data.copy_(masks)
         self.mask_embedding.weight.requires_grad = False
-        self._minus = 1e-6
+        self._minus = -1e6
 
         #         self.mask_embedding = nn.Embedding(4, 3)
         #         self.mask_embedding.weight.data.copy_(torch.FloatTensor([[0, 0, 0], [1, 0, 0], [0, 1, 0], [0, 0, 1]]))
